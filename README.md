@@ -2,8 +2,8 @@
 
 Created by dddictionary#5562
 
-## Current Stauts:
-- Has the ability toe deploy slash commands
+## Current Status:
+- Has the ability to deploy slash commands
 - Can reply to users
 - Can send messages every x seconds.
 
