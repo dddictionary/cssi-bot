@@ -2,13 +2,19 @@ const { Client, Events, GatewayIntentBits,Collection } = require('discord.js');
 const { token } = require('./config.json');
 const path = require('node:path');
 const fs = require('node:fs');
+const cronJob = require('cron').CronJob;
+
+
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent] });
 
 client.once(Events.ClientReady, () => {
 	console.log(`Ready as ${client.user.tag}`);
-	const channel = client.channels.cache.find(channel => channel.name === "general");
-	client.channels.cache.get(channel.id).send('Hello world!');
+	//make the job happen everyday at 12:00PM eastern
+	const job = new cronJob('0 0 12 * * *', () => {
+		const channel = client.channels.cache.find(channel => channel.name === "general");
+		client.channels.cache.get(channel.id).send('Hello world!');
+	});
 });
 
 client.commands = new Collection();
